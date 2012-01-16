@@ -2,7 +2,7 @@
 dofile (path.join(os.getenv("DirScriptsRoot"),"premake_common.lua"))
 
 -- solution UnitTest++ --
-solution "UnitTest++"
+solution "UnitTest"
 
     SolutionConfiguration()
 
@@ -23,7 +23,7 @@ solution "UnitTest++"
 
 project "UnitTest++"
     -- PROJECT MODIFICATIONS START--
-    local _targetname = "UnitTest++"
+    local _targetname = "UnitTest"
     -- additional defines --
     defines {_exportSymbol}
 	files {"src/**.h", "src/**.cpp", "src/**.c"}
@@ -35,10 +35,10 @@ project "UnitTest++"
 
     AppendStaticLibBuildOptions(_targetname.._version)
 
-project "test_UnitTest++"
+project "test_UnitTest"
     -- PROJECT MODIFICATIONS START--
-    local _targetname = "test_UnitTest++"
-    links {"UnitTest++"}
+    local _targetname = "test_UnitTest"
+    links {"UnitTest"}
    files {"src/tests/*"}
     -- PROJECT MODIFICATIONS END--
 

@@ -5,7 +5,7 @@ sys.path.append(scriptdir)
 projectPath = sys.path[0]
 import manageEnv
 try:
-   manageEnv.createUserEnvVar('DirProjectUnitTest++Root',projectPath)
+   manageEnv.createUserEnvVar('DirProjectUnitTestRoot',projectPath)
 except Exception,er:
    print er
 #raw_input()
