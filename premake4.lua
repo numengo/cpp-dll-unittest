@@ -21,7 +21,7 @@ solution "UnitTest"
           }
     -- COMMON CONFIGURATION MODIFICATION - END --
 
-project "UnitTest++"
+project "UnitTest"
     -- PROJECT MODIFICATIONS START--
     local _targetname = "UnitTest"
     -- additional defines --
