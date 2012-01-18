@@ -31,9 +31,28 @@ project "UnitTest"
 		excludes{"src/Posix/*"}
 	configuration {"linux"}
 		excludes{"src/Win32/*"}
-	-- PROJECT MODIFICATIONS END--
 
-    AppendStaticLibBuildOptions(_targetname.._version)
+    configuration {}
+        kind "StaticLib"
+        targetname(_targetname)
+        files {"include/**.h", "src/**.cpp", "src/**.c"}
+
+    AppendCommonOptions()
+
+    sln = solution()
+    local _rootdir =  path.getabsolute(".")
+    for _, cfg in ipairs(sln.configurations) do
+        for _, pltf in ipairs(sln.platforms) do
+            local _lastdirname = getLastDirName(cfg,pltf)
+            configuration {cfg, pltf}
+                libdirs { convertPath(path.join(checkAndGetEnv("DirLibraryRoot"),_lastdirname))}
+                targetdir(convertPath(_rootdir.."/lib/".._lastdirname))
+                prebuildcommands (MKDIR..convertPath(_rootdir.."/lib/".._lastdirname))
+                postbuildcommands(MKDIR..convertPath(checkAndGetEnv("DirLibraryRoot").."/".._lastdirname))
+                postbuildcommands(CP..convertPath(_rootdir.."/lib/".._lastdirname.."/*".._targetname)..getStaticLibExtension().." "..convertPath(checkAndGetEnv("DirLibraryRoot").."/".._lastdirname))
+        end
+    end
+	-- PROJECT MODIFICATIONS END--
 
 project "test_UnitTest"
     -- PROJECT MODIFICATIONS START--
