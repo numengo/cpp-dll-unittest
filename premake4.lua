@@ -26,16 +26,16 @@ project "UnitTest"
     local _targetname = "UnitTest"
     -- additional defines --
     defines {_exportSymbol}
-	files {"src/**.h", "src/**.cpp", "src/**.c"}
-	configuration {"windows"}
-		excludes{"src/Posix/*"}
+	configuration {"windows"}--
+		files {"src/*.h", "src/*.cpp", "src/*.c"}
+		files {"src/Win32/*.h", "src/Win32/*.cpp"}
 	configuration {"linux"}
-		excludes{"src/Win32/*"}
+		files {"src/**.h", "src/**.cpp", "src/**.c"}
+		files {"src/Posix/*.h", "src/Posix/*.cpp"}
 
     configuration {}
         kind "StaticLib"
         targetname(_targetname)
-        files {"include/**.h", "src/**.cpp", "src/**.c"}
 
     AppendCommonOptions()
 
